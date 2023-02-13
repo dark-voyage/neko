@@ -33,7 +33,7 @@ Then run the following commands:
 
 ```bash
 make
-./server # or ./server [port]
+./neko # or ./neko [port]
 ```
 
 ## License
