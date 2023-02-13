@@ -21,7 +21,7 @@
 
 static int listenfd;
 int *clients;
-static void start_serve(const char *);
+static void start_server(const char *);
 static void respond(int);
 
 static char *buf;
@@ -60,7 +60,7 @@ void serve_forever(const char *PORT) {
   int i;
   for (i = 0; i < MAX_CONNECTIONS; i++)
     clients[i] = -1;
-  start_serve(PORT);
+  start_server(PORT);
 
   // Ignore child process termination
   signal(SIGCHLD, SIG_IGN);
@@ -86,6 +86,52 @@ void serve_forever(const char *PORT) {
 
     while (clients[slot] != -1) slot = (slot + 1) % MAX_CONNECTIONS;
   }
+}
+
+void start_server(const char *port) {
+  struct addrinfo hints, *res, *p;
+
+  // getaddrinfo for host
+  memset(&hints, 0, sizeof(hints));
+  hints.ai_family = AF_INET;
+  hints.ai_socktype = SOCK_STREAM;
+  hints.ai_flags = AI_PASSIVE;
+  if (getaddrinfo(NULL, port, &hints, &res) != 0) {
+    perror("getaddrinfo() error");
+    exit(1);
+  }
+  // socket and bind
+  for (p = res; p != NULL; p = p->ai_next) {
+    int option = 1;
+    listenfd = socket(p->ai_family, p->ai_socktype, 0);
+    setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
+    if (listenfd == -1)
+      continue;
+    if (bind(listenfd, p->ai_addr, p->ai_addrlen) == 0)
+      break;
+  }
+  if (p == NULL) {
+    perror("socket() or bind()");
+    exit(1);
+  }
+
+  freeaddrinfo(res);
+
+  // listen for incoming connections
+  if (listen(listenfd, QUEUE_SIZE) != 0) {
+    perror("listen() error");
+    exit(1);
+  }
+}
+
+char *request_header(const char *name) {
+  header_t *h = reqhdr;
+  while (h->name) {
+    if (strcmp(h->name, name) == 0)
+      return h->value;
+    h++;
+  }
+  return NULL;
 }
 
 static void uri_unescape(char *uri) {
