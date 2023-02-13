@@ -57,4 +57,17 @@ void route();
 #define HTTP_404 printf("%s 404 Not found\n\n", RESPONSE_PROTOCOL)
 #define HTTP_500 printf("%s 500 Internal Server Error\n\n", RESPONSE_PROTOCOL)
 
+// Some interesting macro for route();
+#define ROUTE_START() \
+  if (0) {
+    #define ROUTE(METHOD, URI)                                                     \
+  }                                                                                \
+  else if (strcmp(URI, uri) == 0 && strcmp(METHOD, method) == 0) {
+    #define GET(URI) ROUTE("GET", URI)
+    #define POST(URI) ROUTE("POST", URI)
+    #define ROUTE_END()                                                            \
+  }                                                                                \
+  else HTTP_500;
+
+
 #endif //NEKO_HTTP_H
