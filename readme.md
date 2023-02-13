@@ -6,6 +6,7 @@ C static socket server library made for rustlib fork
 
 [![GitHub top language](https://img.shields.io/github/languages/top/katsuki-yuri/neko?style=flat-square&logo=github)](https://github.com/katsuki-yuri/neko)
 [![Channel](https://img.shields.io/badge/Chat-grey?style=flat-square&logo=telegram)](https://t.me/yurionblog)
+[![Makefile CI](https://github.com/katsuki-yuri/neko/actions/workflows/ci.yml/badge.svg)](https://github.com/katsuki-yuri/neko/actions/workflows/ci.yml)
 
 </header>
 
