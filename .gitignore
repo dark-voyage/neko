@@ -56,3 +56,6 @@ cmake-build-debug
 
 # idea files
 .idea
+
+# macos files
+.DS_Store
