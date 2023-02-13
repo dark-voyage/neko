@@ -8,13 +8,6 @@
 #include <stdio.h>
 #include <string.h>
 
-//   ______
-//  /_  __/_  ______  ___  _____
-//   / / / / / / __ \/ _ \/ ___/
-//  / / / /_/ / /_/ /  __(__  )
-// /_/  \__, / .___/\___/____/
-//     /____/_/
-
 extern char *method, // "GET" or "POST"
         *uri,        // "/index.html" things before '?'
         *qs,         // "a=1&b=2"   things after '?'
@@ -22,12 +15,6 @@ extern char *method, // "GET" or "POST"
         *payload;    // for POST
 
 extern int payload_size;
-
-//    _____                              ___________
-//   / ___/___  ______   _____  _____   / ____/ ___/
-//   \__ \/ _ \/ ___/ | / / _ \/ ___/  / /_   \__ \
-//  ___/ /  __/ /   | |/ /  __/ /     / __/  ___/ /
-// /____/\___/_/    |___/\___/_/     /_/    /____/
 
 void serve_forever(const char *PORT);
 char *request_header(const char *name);
@@ -39,13 +26,6 @@ typedef struct {
 
 static header_t reqhdr[17] = {{ "\0", "\0" }};
 header_t *request_headers(void);
-
-//     ____                __
-//    /  _/___ ___  ____  / /____
-//    / // __ `__ \/ __ \/ / ___/
-//  _/ // / / / / / /_/ / (__  )
-// /___/_/ /_/ /_/ .___/_/____/
-//              /_/
 
 void route();
 
