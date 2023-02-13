@@ -88,6 +88,35 @@ void serve_forever(const char *PORT) {
   }
 }
 
+static void uri_unescape(char *uri) {
+  char chr = 0;
+  char *src = uri;
+  char *dst = uri;
+
+  // Skip initial non-encoded character
+  while (*src && !isspace((int)(*src)) && (*src != '%'))
+    src++;
+
+  // Replace encoded characters with the actual character
+  dst = src;
+  while (*src && !isspace((int)(*src))) {
+    if (*src == '+')
+      chr = ' ';
+    else if ((*src == '%') && src[1] && src[2])
+    {
+      src++;
+      chr = ((*src & 0x0F) + 9 * (*src > '9')) * 16;
+      src++;
+      chr += ((*src & 0x0F) + 9 * (*src > '9'));
+    }
+    else
+      chr = *src;
+    *dst++ = chr;
+    src++;
+  }
+  *dst = '\0';
+}
+
 void respond(int slot) {
   int rcvd;
 
