@@ -4,6 +4,9 @@ clean:
 	@rm -rf *.o
 	@rm -rf neko
 
+format:
+	find . -regex '.*\.\(c\|h\)' -exec clang-format -style=file -i {} \;
+
 server: main.o http.o
 	gcc -o neko $^
 

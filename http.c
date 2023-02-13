@@ -44,7 +44,7 @@ void serve_forever(const char *PORT) {
   printf("Server started %shttp://127.0.0.1:%s%s\n", "\033[92m", PORT,
          "\033[0m");
 
-  // create shared memory for client slot array
+  // create shared memory for a client slot array
   clients = mmap(NULL, sizeof(*clients) * MAX_CONNECTIONS,
                  PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_SHARED, -1, 0);
 
@@ -139,7 +139,7 @@ static void uri_unescape(char *uri) {
   char *src = uri;
   char *dst = uri;
 
-  // Skip inital non encoded character
+  // Skip initial non-encoded character
   while (*src && !isspace((int)(*src)) && (*src != '%'))
     src++;
 
@@ -171,7 +171,7 @@ void respond(int slot) {
   if (rcvd < 0) // receive error
     fprintf(stderr, ("recv() error\n"));
   else if (rcvd == 0) // receive socket closed
-    fprintf(stderr, "Client disconnected upexpectedly.\n");
+    fprintf(stderr, "Client disconnected unexpectedly.\n");
   else // message received
   {
     buf[rcvd] = '\0';
