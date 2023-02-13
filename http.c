@@ -19,19 +19,23 @@
 #define BUF_SIZE 65535
 #define QUEUE_SIZE 1000000
 
-int *clients;
-static char *buf;
 static int listenfd;
+int *clients;
 static void start_server(const char *);
 static void respond(int);
 
+static char *buf;
+
 // Client request
-int payload_size;
 char *method,
         *uri,
         *qs,
         *prot,
         *payload;
+
+int payload_size;
+
+
 
 void serve_forever(const char *PORT) {
   struct sockaddr_in clientaddr;
