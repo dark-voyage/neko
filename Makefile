@@ -1,5 +1,3 @@
-#!/usr/bin/env just --justfile
-
 all: server
 
 clean:
