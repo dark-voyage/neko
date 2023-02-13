@@ -7,12 +7,6 @@
 
 #include <sys/stat.h>
 
-int main(int c, char **v) {
-  char *port = c == 1 ? "8000" : v[1];
-  serve_forever(port);
-  return 0;
-}
-
 int file_exists(const char *file_name) {
   struct stat buffer;
   int exists;
