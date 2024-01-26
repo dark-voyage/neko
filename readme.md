@@ -2,7 +2,7 @@
 <img src="https://www.orzklv.uz/favicons/logo.png" alt="logo" height="100" align="left">
 <h1 style="display: inline">Neko</h1>
 
-C static socket server library made for rustlib fork
+C static socket server library
 
 [![GitHub top language](https://img.shields.io/github/languages/top/orzklv/neko?style=flat-square&logo=github)](https://github.com/orzklv/neko)
 [![Channel](https://img.shields.io/badge/Chat-grey?style=flat-square&logo=telegram)](https://t.me/orzklvb)
